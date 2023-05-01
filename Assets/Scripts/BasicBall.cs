@@ -12,5 +12,6 @@ public class BasicBall : TeleBall
             TeleportPlayer(collision);
             playerTeleported = true;
         }
+        Destroy(gameObject);
     }
 }
