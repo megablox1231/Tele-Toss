@@ -9,7 +9,7 @@ public class BasicBall : TeleBall
 {
     private void OnCollisionEnter2D(Collision2D collision) {
         if (!playerTeleported) {
-            TeleportPlayer(collision);
+            TeleportPlayer();
             playerTeleported = true;
         }
         Destroy(gameObject);

@@ -17,7 +17,7 @@ public class BounceBall : TeleBall
             bounceCount++;
             colliding = true;
             if (bounceCount > maxBounces) {
-                TeleportPlayer(collision);
+                TeleportPlayer();
                 playerTeleported = true;
                 Destroy(gameObject);
             }

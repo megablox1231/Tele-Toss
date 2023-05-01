@@ -9,37 +9,59 @@ using UnityEngine;
 public class TeleBall : MonoBehaviour
 {
     protected float teleportOffset;
+    protected float halfLength;
+    protected float halfHeight;
     [HideInInspector] public Transform player;
     protected bool playerTeleported;
 
-    [SerializeField] LayerMask groundCheckMask;
+    [SerializeField] LayerMask raycastMask;
     BoxCollider2D groundCollider;
     float radius;
 
-    // Start is called before the first frame update
+
     virtual protected void Start()
     {
         radius = GetComponent<CircleCollider2D>().radius;
         groundCollider = GetComponentInChildren<BoxCollider2D>();
-        teleportOffset = player.GetComponent<BoxCollider2D>().size.y / 2 - radius;
+        BoxCollider2D playerColl = player.GetComponent<BoxCollider2D>();
+        teleportOffset = playerColl.size.y / 2 - radius;
+        halfHeight = playerColl.size.y / 2;
+        halfLength = playerColl.size.x / 2;
     }
 
     protected bool GroundCheck() 
     {
-        return groundCollider.IsTouchingLayers(groundCheckMask);
+        return groundCollider.IsTouchingLayers(raycastMask);
     }
 
-    protected void TeleportPlayer(Collision2D collision) {
-        // If collider below ball, offset teleport position up 
-        if (collision.collider.ClosestPoint(transform.position - Vector3.up * radius).y < (transform.position - Vector3.up * radius).y) {
-            player.transform.position = transform.position + Vector3.up * teleportOffset;
+    protected void TeleportPlayer()
+    {
+        RaycastHit2D hitUp = Physics2D.BoxCast(transform.position, new Vector2(radius * 2, 0.001f), 0, Vector2.up, halfHeight, raycastMask);
+        RaycastHit2D hitRight = Physics2D.BoxCast(transform.position, new Vector2(0.001f, radius * 2), 0, Vector2.right, halfLength, raycastMask);
+        RaycastHit2D hitDown = Physics2D.BoxCast(transform.position, new Vector2(radius * 2, 0.001f), 0, Vector2.down, halfHeight, raycastMask);
+        RaycastHit2D hitLeft = Physics2D.BoxCast(transform.position, new Vector2(0.001f, radius * 2), 0, Vector2.left, halfLength, raycastMask);
+
+        Vector3 offset = Vector3.zero;
+        if (hitUp.collider != null) 
+        {
+            offset.y -= halfHeight - hitUp.distance;
         }
-        else {
-            player.transform.position = transform.position - Vector3.up * teleportOffset;
+        if (hitRight.collider != null)
+        {
+            offset.x -= halfLength - hitRight.distance;
         }
+        if (hitDown.collider != null)
+        {
+            offset.y += halfHeight - hitDown.distance;
+        }
+        if (hitLeft.collider != null)
+        {
+            offset.x += halfLength - hitLeft.distance;
+        }
+
+        Debug.Log(offset);
+
+        player.transform.position = transform.position + offset;
     }
 
-    protected void TeleportPlayer() {
-        player.transform.position = transform.position + Vector3.up * teleportOffset;
-    }
 }
