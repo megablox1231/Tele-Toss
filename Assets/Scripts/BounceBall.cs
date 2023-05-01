@@ -16,10 +16,10 @@ public class BounceBall : TeleBall
         if (!playerTeleported && !colliding) {
             bounceCount++;
             colliding = true;
-            Debug.Log("bounced");
             if (bounceCount > maxBounces) {
                 TeleportPlayer(collision);
                 playerTeleported = true;
+                Destroy(gameObject);
             }
         }
     }
