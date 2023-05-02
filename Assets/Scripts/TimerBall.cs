@@ -17,7 +17,7 @@ public class TimerBall : TeleBall
 
     void Update() {
         if (Input.GetMouseButtonUp(0) && !playerTeleported) {
-            player.transform.position = transform.position;
+            TeleportPlayer();
             Destroy(gameObject);
         }
     }

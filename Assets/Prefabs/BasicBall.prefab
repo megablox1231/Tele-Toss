@@ -138,9 +138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  groundCheckMask:
+  raycastMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 81
 --- !u!1 &8616070289282379179
 GameObject:
   m_ObjectHideFlags: 0
