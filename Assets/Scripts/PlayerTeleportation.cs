@@ -20,13 +20,14 @@ public class PlayerTeleportation : MonoBehaviour
     void Start()
     {
         activeBall = null;
+        curBallType = 0;
         ballTypeInventory = new int[] {4, 4, 4};
     }
 
     void Update()
     {
         // Only allow player to throw a ball if one isn't being thrown
-        if(activeBall == null) {
+        if(activeBall == null && LevelController.getNumLeft(curBallType) > 0) {
             // Setting direction of throw arrow
             if (Input.GetMouseButton(0))
             {
@@ -46,6 +47,7 @@ public class PlayerTeleportation : MonoBehaviour
             if (Input.GetMouseButtonUp(0)) 
             {
                 ThrowBall();
+                LevelController.decrementBall(curBallType);
                 throwArrow.gameObject.SetActive(false);
             }
         }
@@ -62,7 +64,6 @@ public class PlayerTeleportation : MonoBehaviour
     void ThrowBall() 
     {
         if(activeBall == null) {
-            Destroy(activeBall);
             // Getting mouse position in world
             Vector3 mousePos = Input.mousePosition;
             Vector3 worldPos = Camera.main.ScreenToWorldPoint(mousePos);

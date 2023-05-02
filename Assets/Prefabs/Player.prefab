@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1763372064310566499}
   - component: {fileID: 1763372064310566498}
   - component: {fileID: 5648091356506883825}
-  - component: {fileID: 1763372064310566510}
   - component: {fileID: 1763372064310566511}
   - component: {fileID: 1763372064310566508}
   m_Layer: 7
@@ -156,21 +155,6 @@ MonoBehaviour:
   - {fileID: 6194448092709517349, guid: 899d26da7e0cd27479f881711a50b50f, type: 3}
   throwForce: 300
   throwArrow: {fileID: 5960822164243492187}
---- !u!114 &1763372064310566510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763372064310566501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cc18a21bb3939241ab17daabd8dbae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpableGround:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &1763372064310566511
 MonoBehaviour:
   m_ObjectHideFlags: 0
