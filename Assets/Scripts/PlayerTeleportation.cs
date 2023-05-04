@@ -26,6 +26,8 @@ public class PlayerTeleportation : MonoBehaviour
 
     void Update()
     {
+        if (PauseScreen.gamePaused) { return; }
+
         // Only allow player to throw a ball if one isn't being thrown
         if(activeBall == null && LevelController.getNumLeft(curBallType) > 0) {
             // Setting direction of throw arrow
