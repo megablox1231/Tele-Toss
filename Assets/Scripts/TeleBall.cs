@@ -59,8 +59,6 @@ public class TeleBall : MonoBehaviour
             offset.x += halfLength - hitLeft.distance;
         }
 
-        Debug.Log(offset);
-
         player.transform.position = transform.position + offset;
     }
 

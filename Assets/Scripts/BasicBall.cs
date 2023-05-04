@@ -8,6 +8,9 @@ using UnityEngine;
 public class BasicBall : TeleBall
 {
     private void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.tag == "Finish") {
+            LevelController.win();
+        }
         if (!playerTeleported) {
             TeleportPlayer();
             playerTeleported = true;

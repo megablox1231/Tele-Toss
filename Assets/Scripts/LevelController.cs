@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
@@ -27,9 +28,9 @@ public class LevelController : MonoBehaviour
         balls[2] = numBall2;
     }
 
-    void Update()
-    {
-        
+    // Finish the level and go to the next scene
+    public static void win() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     // Decerements the amount of balls left for a type

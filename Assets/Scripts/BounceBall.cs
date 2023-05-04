@@ -17,6 +17,9 @@ public class BounceBall : TeleBall
             bounceCount++;
             colliding = true;
             if (bounceCount > maxBounces) {
+                if(collision.gameObject.tag == "Finish") {
+                    LevelController.win();
+                }
                 TeleportPlayer();
                 playerTeleported = true;
                 Destroy(gameObject);
