@@ -12,19 +12,24 @@ public class BounceBall : TeleBall
 
     bool colliding;
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (!playerTeleported && !colliding) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!playerTeleported && !colliding)
+        {
             bounceCount++;
             colliding = true;
-            if (bounceCount > maxBounces) {
-                TeleportPlayer();
+            if (bounceCount > maxBounces)
+            {
+                StartCoroutine(TeleportPlayer());
                 playerTeleported = true;
-                Destroy(gameObject);
             }
         }
+        audioSrc.Play();
+        audioSrc.volume /= 1.3f;
     }
 
-    private void OnCollisionExit2D(Collision2D collision) {
+    private void OnCollisionExit2D(Collision2D collision)
+    {
         colliding = false;
     }
 }

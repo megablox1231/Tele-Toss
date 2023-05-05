@@ -7,11 +7,14 @@ using UnityEngine;
 /// </summary>
 public class BasicBall : TeleBall
 {
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (!playerTeleported) {
-            TeleportPlayer();
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!playerTeleported)
+        {
+            StartCoroutine(TeleportPlayer());
             playerTeleported = true;
         }
-        Destroy(gameObject);
+        audioSrc.Play();
+        audioSrc.volume /= 1.3f;
     }
 }

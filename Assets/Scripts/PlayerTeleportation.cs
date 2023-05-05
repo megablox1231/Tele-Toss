@@ -9,19 +9,29 @@ public class PlayerTeleportation : MonoBehaviour
 {
 
     [SerializeField] GameObject[] ballTypeArray;
-    int[] ballTypeInventory;
     int curBallType;
 
     [SerializeField] float throwForce;
     [SerializeField] Transform throwArrow;
 
+    AudioSource audioSrc;
+    [SerializeField] AudioClip throwAudio;
+    [SerializeField] AudioClip teleportAudio;
+
+    Animator animator;
+    [SerializeField] AnimationClip teleportAnim;
+    [HideInInspector] public float teleportTime;
+
     GameObject activeBall;
 
     void Start()
     {
+        audioSrc = GetComponent<AudioSource>();
+        animator = GetComponent<Animator>();
+        teleportTime = teleportAnim.length;
+
         activeBall = null;
         curBallType = 0;
-        ballTypeInventory = new int[] {4, 4, 4};
     }
 
     void Update()
@@ -76,6 +86,14 @@ public class PlayerTeleportation : MonoBehaviour
             activeBall = Instantiate(ballTypeArray[curBallType], transform.position, Quaternion.identity);
             activeBall.GetComponent<Rigidbody2D>().AddForce(direction * throwForce);
             activeBall.GetComponent<TeleBall>().player = transform;
+            audioSrc.clip = throwAudio;
+            audioSrc.Play();
         }
+    }
+
+    public void TeleportAudioVisuals() {
+        audioSrc.clip = teleportAudio;
+        audioSrc.Play();
+        animator.Play(teleportAnim.name);
     }
 }

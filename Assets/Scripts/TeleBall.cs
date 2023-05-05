@@ -14,6 +14,8 @@ public class TeleBall : MonoBehaviour
     [HideInInspector] public Transform player;
     protected bool playerTeleported;
 
+    protected AudioSource audioSrc;
+
     [SerializeField] LayerMask raycastMask;
     BoxCollider2D groundCollider;
     float radius;
@@ -21,6 +23,7 @@ public class TeleBall : MonoBehaviour
 
     virtual protected void Start()
     {
+        audioSrc = GetComponent<AudioSource>();
         radius = GetComponent<CircleCollider2D>().radius;
         groundCollider = GetComponentInChildren<BoxCollider2D>();
         BoxCollider2D playerColl = player.GetComponent<BoxCollider2D>();
@@ -34,12 +37,20 @@ public class TeleBall : MonoBehaviour
         return groundCollider.IsTouchingLayers(raycastMask);
     }
 
-    protected void TeleportPlayer()
+    protected IEnumerator TeleportPlayer()
     {
-        RaycastHit2D hitUp = Physics2D.BoxCast(transform.position, new Vector2(radius * 2, 0.001f), 0, Vector2.up, halfHeight, raycastMask);
-        RaycastHit2D hitRight = Physics2D.BoxCast(transform.position, new Vector2(0.001f, radius * 2), 0, Vector2.right, halfLength, raycastMask);
-        RaycastHit2D hitDown = Physics2D.BoxCast(transform.position, new Vector2(radius * 2, 0.001f), 0, Vector2.down, halfHeight, raycastMask);
-        RaycastHit2D hitLeft = Physics2D.BoxCast(transform.position, new Vector2(0.001f, radius * 2), 0, Vector2.left, halfLength, raycastMask);
+        // Hold position of ball at collision to teleport to later
+        Vector3 telePos = transform.position;
+
+        PlayerTeleportation playerTeleport = player.GetComponent<PlayerTeleportation>();
+        playerTeleport.TeleportAudioVisuals();
+        // Wait until teleport animation is done to actually move player
+        yield return new WaitForSeconds(playerTeleport.teleportTime);
+
+        RaycastHit2D hitUp = Physics2D.BoxCast(telePos, new Vector2(radius * 2, 0.001f), 0, Vector2.up, halfHeight, raycastMask);
+        RaycastHit2D hitRight = Physics2D.BoxCast(telePos, new Vector2(0.001f, radius * 2), 0, Vector2.right, halfLength, raycastMask);
+        RaycastHit2D hitDown = Physics2D.BoxCast(telePos, new Vector2(radius * 2, 0.001f), 0, Vector2.down, halfHeight, raycastMask);
+        RaycastHit2D hitLeft = Physics2D.BoxCast(telePos, new Vector2(0.001f, radius * 2), 0, Vector2.left, halfLength, raycastMask);
 
         Vector3 offset = Vector3.zero;
         if (hitUp.collider != null) 
@@ -59,9 +70,8 @@ public class TeleBall : MonoBehaviour
             offset.x += halfLength - hitLeft.distance;
         }
 
-        Debug.Log(offset);
-
-        player.transform.position = transform.position + offset;
+        player.transform.position = telePos + offset;
+        Destroy(gameObject);
     }
 
 }
