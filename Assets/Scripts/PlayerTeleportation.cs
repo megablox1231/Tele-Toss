@@ -76,6 +76,6 @@ public class PlayerTeleportation : MonoBehaviour
             activeBall = Instantiate(ballTypeArray[curBallType], transform.position, Quaternion.identity);
             activeBall.GetComponent<Rigidbody2D>().AddForce(direction * throwForce);
             activeBall.GetComponent<TeleBall>().player = transform;
-        }l
+        }
     }
 }
