@@ -11,10 +11,12 @@ public class BasicBall : TeleBall
         if(collision.gameObject.tag == "Finish") {
             LevelController.win();
         }
-        if (!playerTeleported) {
-            TeleportPlayer();
+        if (!playerTeleported)
+        {
+            StartCoroutine(TeleportPlayer());
             playerTeleported = true;
         }
-        Destroy(gameObject);
+        audioSrc.Play();
+        audioSrc.volume /= 1.3f;
     }
 }

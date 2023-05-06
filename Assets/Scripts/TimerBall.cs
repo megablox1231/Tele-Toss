@@ -17,19 +17,25 @@ public class TimerBall : TeleBall
 
     void Update() {
         if (Input.GetMouseButtonUp(0) && !playerTeleported) {
-            TeleportPlayer();
-            Destroy(gameObject);
+            StartCoroutine(TeleportPlayer());
+            playerTeleported = true;
         }
     }
 
     IEnumerator TimedTeleport() {
         yield return new WaitForSeconds(waitTime);
-        TeleportPlayer();
+        if (!playerTeleported)
+        {
+            playerTeleported = true;
+            StartCoroutine(TeleportPlayer());
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if(collision.gameObject.tag == "Finish") {
             LevelController.win();
         }
+        audioSrc.Play();
+        audioSrc.volume /= 1.3f;
     }
 }
