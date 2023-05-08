@@ -27,6 +27,11 @@ public class PauseScreen : MonoBehaviour
     void Pause() {
         pauseUI.SetActive(true);
         Time.timeScale = 0;
+        GameObject music = GameObject.FindGameObjectWithTag("Music");
+        if (music != null)
+        {
+            music.GetComponent<AudioSource>().Pause();
+        }
         gamePaused = true;
     }
 
@@ -39,6 +44,10 @@ public class PauseScreen : MonoBehaviour
         pauseUI.SetActive(false);
         Time.timeScale = 1;
         yield return new WaitForSeconds(0.1f);
+        GameObject music = GameObject.FindGameObjectWithTag("Music");
+        if (music != null) {
+            music.GetComponent<AudioSource>().UnPause();
+        }
         gamePaused = false;
         EventSystem.current.SetSelectedGameObject(null);
     }
