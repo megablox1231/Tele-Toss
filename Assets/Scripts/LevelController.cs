@@ -12,16 +12,6 @@ public class LevelController : MonoBehaviour
 
     private static int[] balls = new int[3]; // Array to contain the above values
 
-    // GUI
-    public Font font;
-
-    void OnGUI() {
-        GUI.skin.font = font;
-        //GUI.Label(new Rect(830, 112, 100, 100), "x" + balls[0]);
-        //GUI.Label(new Rect(830, 160, 100, 100), "x" + balls[1]);
-        //GUI.Label(new Rect(830, 208, 100, 100), "x" + balls[2]);
-    }
-
     void Start()
     {
         balls[0] = numBall0;
