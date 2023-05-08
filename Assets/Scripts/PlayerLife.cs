@@ -18,7 +18,7 @@ public class PlayerLife : MonoBehaviour
     }
 
     private void Die(){
-        RestartLevel();
+        SceneManager.LoadScene("GameOver");
     }
 
     private void RestartLevel(){
