@@ -45,3 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numBall0: 0
+  numBall1: 0
+  numBall2: 0
+  font: {fileID: 12800000, guid: dd36f2dcd7f30a644aa2246a301d31d0, type: 3}

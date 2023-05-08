@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Controls the throwing of TeleBalls and manages their inventory.
@@ -37,6 +38,11 @@ public class PlayerTeleportation : MonoBehaviour
     void Update()
     {
         if (PauseScreen.gamePaused) { return; }
+
+        // Restart when pressing R
+        if(Input.GetKeyDown(KeyCode.R)) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 
         // Only allow player to throw a ball if one isn't being thrown
         if(activeBall == null && LevelController.getNumLeft(curBallType) > 0) {
