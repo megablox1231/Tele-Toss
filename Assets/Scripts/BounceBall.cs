@@ -17,22 +17,19 @@ public class BounceBall : TeleBall
         if(collision.gameObject.tag == "kill_nobounce") {
             PlayerLife.killPlayer();
         }
+        if(collision.gameObject.tag == "Finish") {
+            LevelController.win();
+        }
         if (!playerTeleported && !colliding)
         {
             bounceCount++;
             colliding = true;
-        if (bounceCount > maxBounces) {
-            if(collision.gameObject.tag == "Finish") {
-                    LevelController.win();
-            }
-            else {
-                StartCoroutine(TeleportPlayer());
-                playerTeleported = true;
-            }
+        if (bounceCount > maxBounces)
+            StartCoroutine(TeleportPlayer());
+            playerTeleported = true;
         }
         audioSrc.Play();
         audioSrc.volume /= 1.3f;
-        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)

@@ -57,7 +57,7 @@ public class PlayerTeleportation : MonoBehaviour
                 throwArrow.rotation = Quaternion.LookRotation(Vector3.forward, rotatedDir);
             }
             // Throw arrow active while left mouse button held down
-            if (Input.GetMouseButtonDown(0)) 
+            if (Input.GetMouseButton(0)) 
             {
                 throwArrow.gameObject.SetActive(true);
             }

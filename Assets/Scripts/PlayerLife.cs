@@ -21,7 +21,7 @@ public class PlayerLife : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("Saw")){
+        if (collision.gameObject.CompareTag("kill_bounce") || collision.gameObject.CompareTag("kill_nobounce")) {
             Die();
         }
     }
