@@ -8,6 +8,9 @@ using UnityEngine;
 public class BasicBall : TeleBall
 {
     private void OnCollisionEnter2D(Collision2D collision) {
+        if(collision.gameObject.tag == "kill_bounce" || collision.gameObject.tag == "kill_nobounce") {
+            PlayerLife.killPlayer();
+        }
         if(collision.gameObject.tag == "Finish") {
             LevelController.win();
         }

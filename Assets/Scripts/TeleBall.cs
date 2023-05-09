@@ -35,7 +35,6 @@ public class TeleBall : MonoBehaviour
         halfHeight = playerColl.size.y / 2;
         halfLength = playerColl.size.x / 2;
     }
-
     protected bool GroundCheck() 
     {
         return groundCollider.IsTouchingLayers(raycastMask);

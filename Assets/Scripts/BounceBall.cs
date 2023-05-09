@@ -14,6 +14,9 @@ public class BounceBall : TeleBall
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.tag == "kill_nobounce") {
+            PlayerLife.killPlayer();
+        }
         if (!playerTeleported && !colliding)
         {
             bounceCount++;

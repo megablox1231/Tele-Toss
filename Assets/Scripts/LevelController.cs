@@ -12,8 +12,18 @@ public class LevelController : MonoBehaviour
 
     private static int[] balls = new int[3]; // Array to contain the above values
 
+    public DeathManager dm;
+
     void Start()
     {
+        GameObject g = GameObject.FindWithTag("DeathManager");
+        if(g == null) {
+            // No DeathManager, create one
+            Instantiate(dm, Vector2.zero, Quaternion.identity);
+        }
+        dm = GameObject.FindWithTag("DeathManager").GetComponent<DeathManager>();
+        dm.setSceneIndex(SceneManager.GetActiveScene().buildIndex);
+
         balls[0] = numBall0;
         balls[1] = numBall1;
         balls[2] = numBall2;

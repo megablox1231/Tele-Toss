@@ -7,6 +7,9 @@ TagManager:
   - Saw
   - Coin
   - Music
+  - kill_bounce
+  - kill_nobounce
+  - DeathManager
   layers:
   - Default
   - TransparentFX
