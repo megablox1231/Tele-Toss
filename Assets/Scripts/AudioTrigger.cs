@@ -1,17 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioTrigger : MonoBehaviour
 {
-    [SerializeField] AudioClip bgMusic;
+    public AudioClip gameOverMusic;
+    public AudioClip bgMusic;
+
+    public AudioClip mainMenuMusic;
+
+    AudioSource aus;
+
 
     private void Start()
     {
-        AudioSource audioSource = GameObject.FindGameObjectWithTag("Music").GetComponent<AudioSource>();
-        if (audioSource.clip != bgMusic) {
-            audioSource.clip = bgMusic;
-            audioSource.Play();
+        DontDestroyOnLoad(this.gameObject);
+        aus = GetComponent<AudioSource>();
+        
+        if(!aus.isPlaying) {
+            aus.Play();
+        }
+    }
+
+    void Update() {
+        if(SceneManager.GetActiveScene().name == "MainMenu") {
+            if(aus.clip != mainMenuMusic) {
+                aus.Stop();
+                aus.clip = mainMenuMusic;
+                aus.Play();
+            }
+        }
+        else if(SceneManager.GetActiveScene().name == "GameOver") {
+            if(aus.clip != gameOverMusic) {
+                aus.Stop();
+                aus.clip = gameOverMusic;
+                aus.Play();
+
+            }
+        }
+        else {
+            if(aus.clip != bgMusic) {
+                aus.Stop();
+                aus.clip = bgMusic;
+                aus.Play();
+            }
         }
     }
 }

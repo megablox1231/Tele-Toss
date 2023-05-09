@@ -13,6 +13,7 @@ public class LevelController : MonoBehaviour
     private static int[] balls = new int[3]; // Array to contain the above values
 
     public DeathManager dm;
+    public AudioTrigger at;    
 
     void Start()
     {
@@ -24,6 +25,12 @@ public class LevelController : MonoBehaviour
         dm = GameObject.FindWithTag("DeathManager").GetComponent<DeathManager>();
         dm.setSceneIndex(SceneManager.GetActiveScene().buildIndex);
 
+        GameObject g2 = GameObject.FindWithTag("Music");
+        if(g2 == null) {
+            // No AudioTrigger, create one
+            Instantiate(at, Vector2.zero, Quaternion.identity);
+        }
+
         balls[0] = numBall0;
         balls[1] = numBall1;
         balls[2] = numBall2;
@@ -31,7 +38,13 @@ public class LevelController : MonoBehaviour
 
     // Finish the level and go to the next scene
     public static void win() {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if(SceneManager.GetActiveScene().name == "Level10") {
+            // PLACEHOLDER
+            SceneManager.LoadScene("MainMenu");
+        }
+        else {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 
     // Decerements the amount of balls left for a type

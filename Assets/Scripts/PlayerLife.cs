@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
-
     public static bool death;
     public static void killPlayer() {
         death = true;

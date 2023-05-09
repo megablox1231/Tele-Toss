@@ -203,6 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd78069b9521434380a50197ee9db6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerDeath: {fileID: 8300000, guid: 9dcfb7fc9609c7b49b7000fd079b76d7, type: 3}
 --- !u!95 &2157417523741919966
 Animator:
   serializedVersion: 5
