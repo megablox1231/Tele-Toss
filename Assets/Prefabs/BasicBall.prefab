@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  tpParticles: {fileID: 3352454233131699148, guid: 43be463ef33eaf64bab4ccb6f78035f3, type: 3}
   raycastMask:
     serializedVersion: 2
     m_Bits: 81

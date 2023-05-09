@@ -14,6 +14,9 @@ public class TeleBall : MonoBehaviour
     [HideInInspector] public Transform player;
     protected bool playerTeleported;
 
+    private Rigidbody2D rb;
+
+    public Transform tpParticles;
     protected AudioSource audioSrc;
 
     [SerializeField] LayerMask raycastMask;
@@ -25,6 +28,7 @@ public class TeleBall : MonoBehaviour
     {
         audioSrc = GetComponent<AudioSource>();
         radius = GetComponent<CircleCollider2D>().radius;
+        rb = GetComponent<Rigidbody2D>();
         groundCollider = GetComponentInChildren<BoxCollider2D>();
         BoxCollider2D playerColl = player.GetComponent<BoxCollider2D>();
         teleportOffset = playerColl.size.y / 2 - radius;
@@ -39,6 +43,9 @@ public class TeleBall : MonoBehaviour
 
     protected IEnumerator TeleportPlayer()
     {
+        GameObject e = ((Transform)Instantiate(tpParticles, this.transform.position, Quaternion.identity)).gameObject;
+        rb.Sleep();
+        gameObject.transform.localScale = Vector2.zero;
         // Hold position of ball at collision to teleport to later
         Vector3 telePos = transform.position;
 

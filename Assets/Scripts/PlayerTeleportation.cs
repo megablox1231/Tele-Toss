@@ -76,6 +76,7 @@ public class PlayerTeleportation : MonoBehaviour
             if (curBallType == ballTypeArray.Length) {
                 curBallType = 0;
             }
+            UIManagement.refresh(curBallType);
         }
     }
 
