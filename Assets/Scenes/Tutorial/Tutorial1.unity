@@ -6173,11 +6173,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9185328739158551185, guid: e0995758245d35a438f8c40062ab37dd, type: 3}
       propertyPath: numBall1
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9185328739158551185, guid: e0995758245d35a438f8c40062ab37dd, type: 3}
       propertyPath: numBall2
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9185328739158551185, guid: e0995758245d35a438f8c40062ab37dd, type: 3}
       propertyPath: nextLevel
